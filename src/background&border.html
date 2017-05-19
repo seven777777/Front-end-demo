@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>背景与边框</title>
+	<style type="text/css">
+
+		/* 不让背景色延伸到透明边框下 */
+		.box{
+			width: 200px;
+			height: 120px;
+			border: 3px solid rgba(0,0,0,.2);
+			background-color: orange;
+			background-clip: padding-box;
+			margin-bottom: 30px;
+		}
+		/* 多边框 */
+		.box2{
+			width: 200px;
+			height: 120px;
+			background: yellowgreen;
+			border: 10px solid #655;
+			outline: 5px solid deeppink;
+			outline-offset: 5px;
+			margin-bottom: 30px;
+		}
+
+		.box3{
+			width: 200px;
+			height: 120px;
+			border-radius: 5px;
+			background: yellowgreen;
+			outline: 1px solid #fff;
+			outline-offset: -15px;/* outline 的偏移值可以设为负数 */
+			outline-style: dashed;
+			margin-bottom: 30px;
+		}
+
+		/* 背景位置：calc */
+		.box4{
+			width: 500px;
+			height: 500px;
+			background: url(../img/03.jpg) right bottom no-repeat #58a;
+			/*background-position: right 20px bottom 10px;*/
+			padding: 10px;
+			margin-bottom: 30px;
+			/*background-origin: content-box;*/
+			background-position: calc(100% - 20px) calc(100% - 10px);
+		}
+
+	/* 边框内圆角 */
+
+		/* 1 */
+		.box5{
+			width: 200px;
+			height: 100px;
+			margin-bottom: 30px;
+			background: #655;
+			padding: .8em;
+		}
+		.box5>div{
+			border-radius: .8em;
+			background: tan;
+			padding: 1em;
+			/*height: 70%;*/
+			height: calc(100% - 2em);
+		}
+		/* 2 */
+		.box6{
+			width: 200px;
+			height: 100px;
+			margin-bottom: 30px;
+			background: tan;
+			border-radius: .8em;
+			padding: 1em;
+			box-shadow: 0 0 0 .5em #655;
+			outline: .6em solid #655;
+		}
+	/* 条纹背景 */
+		/* 水平 */
+		.box7{
+			width: 200px;
+			height: 100px;
+			margin-bottom: 30px;
+			background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);
+			background-size: 100% 30px;
+		}
+		/* 垂直 */
+		.box8{
+			width: 200px;
+			height: 100px;
+			margin-bottom: 30px;
+			background: repeating-linear-gradient(60deg, #fb3, #fb3 15px, #58a 0, #58a 30px);
+		}
+
+		/* 无规律循环动画 */
+		.box9{
+			width: 100%;
+			height: 300px;
+			margin: 0;
+			display: flex;
+			text-align: center;
+			background: #655;
+			color: white;
+			margin-bottom: 30px;
+		}
+		.loading{
+			margin: auto;
+		}
+		.loading:before{
+			content: '';
+			display: block;
+			width: 4em;
+			height: 4em;
+			margin: 0 auto 1em;
+			border: 1.5em solid;
+			color: yellowgreen;
+			box-sizing: border-box;
+			animation: 1s spin, .7s radius, 1.1s color, 1.3s width;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+		@keyframes spin{ to{ transform: rotate(1turn); } }
+		@keyframes radius{ 50%{ border-radius: 50%; } }
+		@keyframes color{ 33%{ color: orange; } 66%{ color: deeppink; } }
+		@keyframes width{ 50%{ border-width: .3em; } }
+
+
+		/* 连续的图像边框 */
+		.box10{
+			width: 200px;
+			height: 100px;
+			margin-bottom: 30px;
+			border: 1em solid transparent;
+			padding: 1em;
+			background: linear-gradient(white, white) padding-box, url(../img/03.jpg) border-box 0 / cover;
+		}
+			/* 老式信封样式 */
+			.box11{
+			width: 300px;
+			height: 100px;
+			margin-bottom: 30px;
+			border: 1em solid transparent;
+			padding: 1em;
+			background: linear-gradient(white, white) padding-box,
+	            repeating-linear-gradient(-45deg, red 0, red 12.5%, transparent 0, transparent 25%, 
+	              #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0 / 6em 6em;
+			}
+			/* 蚂蚁线 */
+			.box12{
+			width: 300px;
+			height: 100px;
+			margin-bottom: 30px;
+			border: 1px solid transparent;
+			padding: 1em;
+			background: linear-gradient(white, white) padding-box,
+	            repeating-linear-gradient(-45deg, black 0, transparent 25%,transparent 0, black 50%) 0 / .6em .6em;
+	        animation: ants 12s linear infinite;
+			}
+			@keyframes ants{ to{ background-position: 100% 100%; } }
+
+	</style>
+</head>
+<body>
+	<h3>1.不让背景色延伸到透明边框下</h1>
+	<div class="box"></div>
+	<h3>2.多边框</h1>
+	<div class="box2"></div>
+	<div class="box3"></div>
+	<h3>3.背景位置：calc</h1>
+	<div class="box4"></div>
+	<h3>4.边框内圆角</h1>
+	<ul>
+		<li>1.两个div嵌套</li>
+		<li>2.结合box-shadow和outline</li>
+	</ul>
+	<div class="box5"><div>
+		this is a test
+	</div></div>
+	<div class="box6">
+		this is a test
+	</div>
+	<h3>5.条纹背景-水平</h1>
+	<div class="box7"></div>
+	<h3>6.条纹背景-竖直</h1>
+	<div class="box8"></div>
+	<h3>7.loading无规律循环动画</h1>
+	<div class="box9">
+		<p class="loading">Loading...</p>
+	</div>
+	<h3>8.连续的图像边框</h1>
+	<div class="box10">
+		i have a nice stone art border,dont't i look pretty?
+	</div>
+	<h3>9.老式信封样式</h1>
+	<div class="box11">
+		i have a nice stone art border,dont't i look pretty?
+	</div>
+	<h3>10.蚂蚁线</h1>
+	<div class="box12">
+		i have a nice stone art border,dont't i look pretty?
+	</div>
+</body>
+</html>
