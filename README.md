@@ -2,7 +2,7 @@
 一些平时写的效果，插件的小demo，帮助解决今后开发过程中可能面对的问题及需求
 
 ## HTML&CSS
-### 1.一些关于背景以及边框的样式 [demo](https://seven777777.github.io/Front-end-demo/src/background&border.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/background%26border.html)
+### 1.一些关于背景以及边框的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-background&border.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-background&border.html)
 
 	1. background-clip
 	2. 多边框 outline
