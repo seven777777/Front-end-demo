@@ -52,9 +52,9 @@
 				z-index: -1;/* 为了让伪元素不挡住box的内容 */
 				transform: skew(-45deg);
 			}
-			.box3:hover::before{
+			/*.box3:hover::before{
 				background: #58a;
-			} 
+			} */
 			.box3.hover::before{
 				background: #58a;
 			}
@@ -83,6 +83,28 @@
 				z-index: -1;
 			}
 
+		/* 菱形 */
+		/* 1.基于变形的方案 */
+		.box5{
+			margin-left: 100px;
+			width: 300px;
+			transform: rotate(45deg);
+			overflow: hidden;
+		}
+		.box5>img{
+			display: block;
+			transform: rotate(-45deg) scale(1.42);
+			max-width: 100%;
+		}
+		/* 2.裁剪路径 */
+		.img{
+			clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+			transition: clip-path 1s ease;
+		}
+		.img:hover{
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		}
+
 
 	</style>
 </head>
@@ -106,17 +128,29 @@
 		<div class="box3" style="float: left; cursor: pointer;">click me</div>
 	</div>
 	<div class="box4">使用伪元素实现的边框内圆角</div>
-	
+	<h3>菱形</h3>
+	<ul>
+		<li>1.基于变形，嵌套</li>
+		<li>2.裁切路径方案：clip-path</li>
+	</ul>
+	<div class="box5">
+		<img src="../img/03.jpg" alt="picture">
+	</div>
+	<img src="../img/03.jpg" class="img">
 
 
 	<script type="text/javascript">
 		var box3=document.getElementsByClassName('box3');
-		box3.onmouseover=function(event){
-			event.currentTarget.classList.add('hover');
-		};
-		box3.onmouseout=function(event){
-			event.currentTarget.classList.remove('hover');
-		};
+		var len=box3.length;
+		for(var i=0; i<len; i++){
+			box3[i].onmouseover=function(event){
+				event.currentTarget.classList.add('hover');
+			};
+			box3[i].onmouseout=function(event){
+				event.currentTarget.classList.remove('hover');
+			};
+		}
+		
 	</script>
 </body>
 </html>
