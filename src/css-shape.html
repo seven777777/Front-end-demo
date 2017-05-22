@@ -319,6 +319,29 @@
 			animation-delay: inherit;/*设置延时值继承父级*/
 			
 		}
+		/* svg */
+		.pie2{
+			width: 100px;
+			height: 100px;
+			display: inline-block;
+			margin: 10px;
+			transform: rotate(-90deg);
+		}
+		circle{
+			fill: yellowgreen;
+			stroke: #655;
+			stroke-width:32;
+		}
+		svg{
+			background: yellowgreen;
+			border-radius: 50%;
+		}
+
+		@keyframes grow { to { stroke-dasharray: 100 100 } }
+		.pie2.animated circle {
+			animation: grow 2s infinite linear;
+		}
+
 
 
 	</style>
@@ -391,11 +414,19 @@
 		Content area
 	</main>
 	<h3>饼图</h3>
+	<il>
+		<li>1.基于transfom</li>
+		<li>2.svg</li>
+	</il>
 	<div class="pie"></div>
 	<div class="pie">20%</div>
 	<div class="pie">40%</div>
 	<div class="pie">60%</div>
 	<div class="pie">80%</div>
+
+	<div class="pie2">20%</div>
+	<div class="pie2">60%</div>
+	<div class="pie2 animated">0%</div>
 
 	<script type="text/javascript">
 		/*平行四边形，鼠标经过变色*/
@@ -422,16 +453,31 @@
 			pie.style.animationDelay = '-' + parseFloat(p) + 's';
 		});
 
-		/*function $$(selector, context) {
+		function $$(selector, context) {
 			context = context || document;
 			var elements = context.querySelectorAll(selector);
 			return Array.prototype.slice.call(elements);
-		}
+		} 
 
-		$$('.pie').forEach(function(pie) {
-			var p = pie.textContent;
-			pie.style.animationDelay = '-' + parseFloat(p) + 's';
-		});*/
+		 $$('.pie2').forEach(function(pie) {
+			var p = parseFloat(pie.textContent);
+			var NS = "http://www.w3.org/2000/svg";
+			var svg = document.createElementNS(NS, "svg");
+			var circle = document.createElementNS(NS, "circle");
+			var title = document.createElementNS(NS, "title");
+			
+			circle.setAttribute("r", 16);
+			circle.setAttribute("cx", 16);
+			circle.setAttribute("cy", 16);
+			circle.setAttribute("stroke-dasharray", p + " 100");
+			
+			svg.setAttribute("viewBox", "0 0 32 32");
+			title.textContent = pie.textContent;
+			pie.textContent = '';
+			svg.appendChild(title);
+			svg.appendChild(circle);
+			pie.appendChild(svg);
+		});
 		
 	</script>
 </body>
