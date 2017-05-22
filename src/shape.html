@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>形状</title>
+	<style type="text/css">
+		/* 椭圆 */
+		.box1{
+			width: 100px;
+			height: 80px;
+			background: #fb3;
+			border-radius: 30% 10% / 50% 10%;/* 用斜杠分隔对元素水平和垂直方向原角值的设定 */
+			margin-bottom: 50px;
+		}
+
+		/* 平行四边形 */
+		.box2{
+			width: 100px;
+			height: 40px;
+			background: #fb3;
+			line-height: 30px;
+			text-align: center;
+			box-sizing: border-box;
+			padding: 5px 10px;
+			transform:skewX(-45deg);/* 变形后元素内的文字也会变形 */
+			margin-bottom: 50px;
+		}
+			/* 嵌套元素方案:内部元素加div skew45deg; */
+			.box2>div{
+				transform:skewX(45deg);
+			}
+			/* 伪元素方案 */
+			.box3{
+				width: 100px;
+				height: 40px;
+				line-height: 30px;
+				text-align: center;
+				box-sizing: border-box;
+				padding: 5px 10px;
+				position: relative;
+				margin-bottom: 50px;
+			}
+			.box3::before{
+				content: '';/* 用伪元素生成一个矩形 */
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;/* 让伪元素充满整个box */
+				background: #fb3;
+				transition: all .5s ease;
+				z-index: -1;/* 为了让伪元素不挡住box的内容 */
+				transform: skew(-45deg);
+			}
+			/*.box3:hover::before{
+				background: #58a;
+			} */
+			.box3.hover::before{
+				background: #58a;
+			}
+			
+
+
+			/* 用伪元素方法写个边框内圆角 */
+			.box4{
+				box-sizing: border-box;
+				width: 200px;
+				height: 100px;
+				padding: 10px;
+				position: relative;
+				background: white;
+				border: 1px solid #58a;
+				border-radius: 10px;
+			}
+			.box4::before{
+				content: '';
+				position: absolute;
+				top: -10px;
+				right: -10px;
+				bottom: -10px;
+				left: -10px;
+				background: #58a;
+				z-index: -1;
+			}
+
+		/* 菱形 */
+		/* 1.基于变形的方案 */
+		.box5{
+			margin-left: 100px;
+			width: 300px;
+			transform: rotate(45deg);
+			overflow: hidden;
+		}
+		.box5>img{
+			display: block;
+			transform: rotate(-45deg) scale(1.42);
+			max-width: 100%;
+		}
+		/* 2.裁剪路径 */
+		.img{
+			clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+			transition: clip-path 1s ease;
+		}
+		.img:hover{
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		}
+
+
+	</style>
+</head>
+<body>
+	<h3>椭圆</h3>
+	<div class="box1"></div>
+	<h3>平行四边形</h3>
+	<ul>
+		<li>单纯变形，内部元素也会变形</li>
+		<li>用嵌套元素方案解决</li>
+		<li>伪元素方案</li>
+	</ul>
+	<div class="box2">click me</div>
+	<div class="box2">
+		<div>click me</div>
+	</div>
+	<div class="box3">click me</div>
+	<div style="overflow: hidden; padding-left: 20px;">
+		<div class="box3" style="float: left; cursor: pointer;">click me</div>
+		<div class="box3" style="float: left; cursor: pointer;">click me</div>
+		<div class="box3" style="float: left; cursor: pointer;">click me</div>
+	</div>
+	<div class="box4">使用伪元素实现的边框内圆角</div>
+	<h3>菱形</h3>
+	<ul>
+		<li>1.基于变形，嵌套</li>
+		<li>2.裁切路径方案：clip-path</li>
+	</ul>
+	<div class="box5">
+		<img src="../img/03.jpg" alt="picture">
+	</div>
+	<img src="../img/03.jpg" class="img">
+
+
+	<script type="text/javascript">
+		var box3=document.getElementsByClassName('box3');
+		var len=box3.length;
+		for(var i=0; i<len; i++){
+			box3[i].onmouseover=function(event){
+				event.currentTarget.classList.add('hover');
+			};
+			box3[i].onmouseout=function(event){
+				event.currentTarget.classList.remove('hover');
+			};
+		}
+		
+	</script>
+</body>
+</html>
