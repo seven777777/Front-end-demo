@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<title>形状</title>
 	<style type="text/css">
+		body {
+			padding: 40px;
+			font: 130%/2 Frutiger LT Std, sans-serif;
+		}
 		/* 椭圆 */
 		.box1{
 			width: 100px;
@@ -105,6 +109,217 @@
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 		}
 
+		/* 切角 */
+		/* 1.渐变方案 */
+		/* 一个切角 */
+		.box6{
+			width: 100px;
+			height: 80px;
+			background: #58a;
+			margin-bottom: 30px;
+
+			background: linear-gradient(-45deg, transparent 15px, #58a 0);
+		}
+		/* 两个 */
+		.box7{
+			width: 100px;
+			height: 80px;
+			background: #58a;
+			margin-bottom: 30px;
+
+			background: linear-gradient(-45deg, transparent 15px, #58a 0) right,
+			linear-gradient(45deg, transparent 15px, #655 0) left;
+			background-size: 50% 100%;/* 避免两层渐变相互覆盖 */
+			background-repeat: no-repeat;
+		}
+		/* 四个 */
+		.box8{
+			width: 100px;
+			height: 80px;
+			background: #58a;
+			margin-bottom: 30px;
+
+			background:
+				linear-gradient(135deg, transparent 15px, #58a 0) top left,
+				linear-gradient(225deg, transparent 15px, #58a 0) top right,
+				linear-gradient(-45deg, transparent 15px, #58a 0) bottom right,
+				linear-gradient(45deg, transparent 15px, #58a 0) bottom left;
+			background-size: 50% 50%;
+			background-repeat: no-repeat;
+			
+		}
+		.box9{
+			width: 100px;
+			height: 80px;
+			background: #58a;
+			margin-bottom: 30px;
+
+			background:
+				radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
+				radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
+				radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
+				radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
+			background-size: 50% 50%;
+			background-repeat: no-repeat;
+			
+		}
+		/* 2.内联svg与border-image方案 */
+		.box10{
+			width: 100px;
+			height: 80px;
+			background: #58a;
+			margin-bottom: 30px;
+
+			border: 20px solid transparent;
+			border-image: 1 url('data:image/svg+xml,\
+				<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" fill="%2358a">\
+				<polygon points="0,1 1,0 2,0 3,1 3,2 2,3 1,3 0,2" />\
+				</svg>');
+			background-clip: padding-box;
+		}
+		/* 3.裁切路径方案 */
+		.box11{
+			width: 100px;
+			height: 80px;
+			background: #58a;
+			margin-bottom: 30px;
+
+			clip-path: polygon(
+				20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px
+			);
+			overflow: hidden;
+		}
+		.box11 img{ width: 100% }
+
+		/* 梯形 */
+		.box12{
+			width: 100px;
+			height: 50px;
+			margin-bottom: 30px;
+			color: white;
+			text-align: center;
+			line-height: 50px;
+			position: relative;
+		}
+		.box12::before{
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			background: #58a;
+			transform: scaleY(1.3) perspective(.5em) rotateX(5deg);
+			transform-origin: bottom;
+		}
+		/* 梯形标签 */
+		nav{
+			position: relative;
+			z-index: 1;
+			padding-left: 1em;
+		}
+		nav > a{
+			position: relative;
+			display: inline-block;
+			padding: .3em 1em 0;
+			color: inherit;
+			text-decoration: none;
+			margin: 0 -.3em;
+		}
+		nav > a::before,
+		main{
+			border: .1em solid rgba(0,0,0,.4);
+		}
+		nav a::before{
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			border-bottom: none;
+			border-radius: .5em .5em 0 0;
+			background: #ccc linear-gradient(hsla(0,0%,100%,.6), hsla(0,0%,100%,0));
+			box-shadow: 0 .15em white inset;
+			transform: scale(1.1, 1.3) perspective(.5em) rotateX(5deg);
+			transform-origin: bottom;
+		}
+		nav a.selected{ z-index: 2; }
+		nav a.selected::before{
+			background-color: #eee;
+			margin-bottom: -.08em;
+		}
+		main{
+			display: block;
+			margin-bottom: 1em;
+			background: #eee;
+			padding: 1em;
+			border-radius: .15em;
+		}
+		nav.left > a::before{
+			transform: scale(1.2, 1.3) perspective(.5em) rotateX(5deg);
+			transform-origin: bottom left;
+		}
+		nav.left a.selected::before{
+			margin-bottom: -.1em;
+		}
+		nav.right{ padding-left: 2em; }
+		nav.right > a::before{
+			transform: scale(1.2, 1.3) perspective(.5em) rotateX(5deg);
+			transform-origin: bottom right;
+		}
+
+		/* 饼图 */
+		/* 基于transform */
+		.pie{
+			/*初始化设定*/
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background: yellowgreen;
+
+			/*增加渐变，将圆分成左右两块区域*/
+			background-image: linear-gradient(to right, transparent 50%, #655 0);
+
+			/*静止的比例饼图,将字体颜色设置为transparent使其隐藏，同时保证可访问性*/
+			line-height:100px;
+			color: transparent;
+			text-align: center;
+			position: relative;
+		}
+		@keyframes spin{
+			to{ transform: rotate(.5turn); }
+		}
+		@keyframes bg{
+			50%{ background: #655; }
+		}
+		.pie::before{
+			content: '';
+			display: block;
+			/*margin-left: 50%;*/
+			height: 100%;
+
+			/*让其遮住pie的右侧*/
+			background-color: inherit;
+			/*绕圆心转动,也可直接设置成left*/
+			transform-origin: 0 50%;
+			/*让伪元素变成半圆，也可以给pie设置overflow:hidden;*/
+			border-radius: 0 100% 100% 0 / 50%;
+
+			animation: spin 50s linear infinite, bg 100s step-end infinite;
+
+			/*静止的比例饼图*/
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 50%;
+			animation-play-state: paused;/*设置动画暂停*/
+			animation-delay: inherit;/*设置延时值继承父级*/
+			
+		}
+
 
 	</style>
 </head>
@@ -137,9 +352,53 @@
 		<img src="../img/03.jpg" alt="picture">
 	</div>
 	<img src="../img/03.jpg" class="img">
-
+	<h3>切角</h3>
+	<ul>
+		<li>1.通过渐变</li>
+		<li>2.内联svg与border-image方案</li>
+		<li>3.裁切路径方案</li>
+	</ul>
+	<div class="box6"></div>
+	<div class="box7"></div>
+	<div class="box8"></div>
+	<div class="box9"></div>
+	<div class="box10"></div>
+	<div class="box11"><img src="../img/03.jpg"></div>
+	<h3>梯形</h3>
+	<div class="box12">test</div>
+	<nav>
+		<a href="#">Home</a>
+		<a href="#" class="selected">Projects</a>
+		<a href="#">About</a>
+	</nav>
+	<main>
+		Content area
+	</main>
+	<nav class="left">
+		<a href="#">Home</a>
+		<a href="#" class="selected">Projects</a>
+		<a href="#">About</a>
+	</nav>
+	<main>
+		Content area
+	</main>
+	<nav class="right">
+		<a href="#">Home</a>
+		<a href="#" class="selected">Projects</a>
+		<a href="#">About</a>
+	</nav>
+	<main>
+		Content area
+	</main>
+	<h3>饼图</h3>
+	<div class="pie"></div>
+	<div class="pie">20%</div>
+	<div class="pie">40%</div>
+	<div class="pie">60%</div>
+	<div class="pie">80%</div>
 
 	<script type="text/javascript">
+		/*平行四边形，鼠标经过变色*/
 		var box3=document.getElementsByClassName('box3');
 		var len=box3.length;
 		for(var i=0; i<len; i++){
@@ -150,6 +409,29 @@
 				event.currentTarget.classList.remove('hover');
 			};
 		}
+
+		/*静止的比例饼图*/
+		// var piebox=document.getElementsByClassName('pie');
+		var piebox=document.querySelectorAll(".pie");
+		//getElementsByClassName返回的是一个类似于数组的NodeList
+		//需要使用Array.prototype.slice.call()进行转换
+		
+		// Array.prototype.slice.call(piebox).forEach(function(pie) {
+		piebox.forEach(function(pie) {
+			var p = pie.textContent;
+			pie.style.animationDelay = '-' + parseFloat(p) + 's';
+		});
+
+		/*function $$(selector, context) {
+			context = context || document;
+			var elements = context.querySelectorAll(selector);
+			return Array.prototype.slice.call(elements);
+		}
+
+		$$('.pie').forEach(function(pie) {
+			var p = pie.textContent;
+			pie.style.animationDelay = '-' + parseFloat(p) + 's';
+		});*/
 		
 	</script>
 </body>
