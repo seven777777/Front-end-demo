@@ -13,3 +13,8 @@
 	7. 连续的图像边框
 	8. 老式信封样式边框
 	9. 蚂蚁线
+
+### 2.一些关于形状的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-shape.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-shape.html)
+
+	椭圆、平行四边形、菱形、切角、梯形标签、简单的饼图
+
