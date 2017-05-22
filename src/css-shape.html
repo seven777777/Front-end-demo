@@ -319,6 +319,10 @@
 			animation-delay: inherit;/*设置延时值继承父级*/
 			
 		}
+		.pie.running::before{
+			animation-play-state: running;
+			animation: spin 3s linear infinite, bg 6s step-end infinite;
+		}
 		/* svg */
 		.pie2{
 			width: 100px;
@@ -418,7 +422,7 @@
 		<li>1.基于transfom</li>
 		<li>2.svg</li>
 	</il>
-	<div class="pie"></div>
+	<div class="pie running"></div>
 	<div class="pie">20%</div>
 	<div class="pie">40%</div>
 	<div class="pie">60%</div>
