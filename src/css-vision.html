@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>形状</title>
+	<style type="text/css">
+		body {
+			padding: 40px;
+			font: 130%/2 Frutiger LT Std, sans-serif;
+		}
+		/* 不规则投影 */
+		.box1{
+			width: 100px;
+			height: 80px;
+			/*background: white;*/
+			margin-bottom: 50px;
+			border: 5px dashed #fb3;
+			background-clip: padding-box;
+
+			/* 滤镜，适用于一些不规则形状的投影 */
+			filter: drop-shadow(2px 2px 3px rgba(0,0,0,.5));
+		}
+		/* 染色效果 */
+		/*
+		1.基于滤镜的解决方案，不完全支持
+			sepia():给图片增加降饱和度的橙黄色染色效果;
+			saturate():给每个像素提升饱和度;
+			hue-rotate():把每个像素的色相已指定角度进行偏移;
+		*/
+		.img1{
+			transition: .5s filter;
+			filter: sepia(1) saturate(4) hue-rotate(295deg);
+		}
+		.img1:hover,
+		.img1:focus{
+			filter: none;
+		}
+		/*
+		2.基于混合模式的解决方案，不完全支持
+			mix-blend-mode:为整个元素设置混合模式luminosity;
+			background-blend-mode:为每层背景单独指定混合模式;
+		*/
+		.box2{
+			width: 300px;
+			height: 300px;
+			display: block;
+			background-color: hsl(335,100%,50%);
+			margin-bottom: 10px;
+			transition: background-color .5s;
+		}
+		.img2{
+			mix-blend-mode: luminosity;
+		}
+		.box2:hover{
+			background-color: transparent;
+		}
+
+		.box3{
+			width: 300px;
+			height: 300px;
+			background-image: url(../img/03.jpg);
+			background-size: cover;
+			background-color: hsl(335,100%,50%);
+			background-blend-mode: luminosity;
+			transition: background-color .5s;
+		}
+		.box3:hover{
+			background-color: transparent;
+		}
+
+		/* 毛玻璃效果 */
+		.box4 {
+			min-height: 100vh;
+			box-sizing: border-box;
+			margin: 0;
+			padding-top: calc(50vh - 6em);
+			font: 150%/1.6 Baskerville, Palatino, serif;
+		}
+
+		.box4 , main::before {
+			background: url(../img/02.jpg) 0 / cover fixed;
+		}
+
+		main {
+			position: relative;
+			margin: 0 auto;
+			padding: 1em;
+			max-width: 23em;
+			background: hsla(0,0%,100%,.25) border-box;
+			overflow: hidden;
+			border-radius: .3em;
+			box-shadow: 0 0 0 1px hsla(0,0%,100%,.3) inset,
+			            0 .5em 1em rgba(0, 0, 0, 0.6);
+			text-shadow: 0 1px 1px hsla(0,0%,100%,.3);
+		}
+
+		main::before {
+			content: '';
+			position: absolute;
+			top: 0; right: 0; bottom: 0; left: 0;
+			margin: -30px;
+			z-index: -1;
+			-webkit-filter: blur(20px);
+			filter: blur(20px);
+		}
+
+		blockquote { font-style: italic }
+		blockquote cite { font-style: normal; }
+
+	</style>
+</head>
+<body>
+	<h3>投影</h3>
+	<div class="box1">123</div>
+	<h3>染色效果</h3>
+	<ul>
+		<li>1.基于滤镜</li>
+		<li>2.基于混合模式</li>
+	</ul>
+	<img src="../img/03.jpg" class="img1">
+	<a class="box2" href="#">
+		<img src="../img/03.jpg" class="img2">
+	</a>
+	<div class="box3"></div>
+	<h3>毛玻璃效果</h3>
+	<div class="box4">
+		<main>
+			<blockquote>
+				“The only way to get rid of a temptation is to yield to it. Resist it, and your soul grows sick with longing for the things it has forbidden to itself, with desire for what its monstrous laws have made monstrous and unlawful.”
+				<footer>
+					<cite>
+						Oscar Wilde
+						The Picture of Dorian Grey
+					</cite>
+				</footer>
+			</blockquote>
+		</main>
+	</div>
+</body>
+</html>
