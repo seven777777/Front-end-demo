@@ -18,3 +18,6 @@
 
 	椭圆、平行四边形、菱形、切角、梯形标签、简单的饼图
 
+### 3.一些关于视觉效果的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-vision.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-vision.html)
+
+	不规则投影、染色效果、毛玻璃效果、折角
