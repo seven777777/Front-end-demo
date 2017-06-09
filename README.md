@@ -26,7 +26,7 @@
 
 	文本行的斑马条纹、文本外发光效果、文字凸起效果
 
-### 5.一些关于用户体验的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-font.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-font.html)
+### 5.一些关于用户体验的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-use-experience.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-use-experience.html)
 	
 	扩大可点击区域、自定义复选框、开关式按钮、弱化背景
 
