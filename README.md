@@ -28,6 +28,6 @@
 
 ### 5.一些关于用户体验的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-use-experience.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-use-experience.html)
 	
-	扩大可点击区域、自定义复选框、开关式按钮、弱化背景
+	扩大可点击区域、自定义复选框、开关式按钮、弱化背景、滚动提示、图片对比控件
 
 **自定义复选框其它实现方法：**[**demo**](https://seven777777.github.io/baidu_ife2017/views/nm-Task01.html)/[**代码**](https://github.com/seven777777/baidu_ife2017/blob/master/views/nm-Task01.html)
