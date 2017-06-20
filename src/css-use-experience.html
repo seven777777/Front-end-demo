@@ -152,6 +152,22 @@
 		#modal2:not([open]){
 			display: none;
 		}
+
+		/* 滚动提示 */
+		.scroll{
+			overflow: auto;
+			width: 10em;
+			height: 8em;
+			padding: .3em;
+			border: 1px solid silver;
+ 
+			background: linear-gradient(white 15px,hsla(0,0%,100%,0)) 0 0/100% 50px,
+						radial-gradient(at top,rgba(0,0,0,.2),transparent 70%) 0 0/100% 15px,
+						linear-gradient(to top,white 15px,hsla(0,0%,100%,0)) bottom/100% 50px,
+						radial-gradient(at bottom,rgba(0,0,0,.2),transparent 70%) bottom/100% 15px;
+			background-repeat: no-repeat;
+			background-attachment: local, scroll, local, scroll;/* 上层白色阴影随着滚动 下层经向阴影始终保持原位 */
+		}
 	</style>
 </head>
 <body>
@@ -176,6 +192,20 @@
 				<button onclick="document.querySelector('#modal').showModal()">backdrop方案</button>
 			</li>
 			<li><button id="btn">模糊</button></li>
+		</ul>
+		<h3>滚动提示</h3>
+		<ul class="scroll">
+			<li>Ada Catlace</li>	
+			<li>Alan Purring</li>
+			<li>Schrödingcat</li>
+			<li>Tim Purrners-Lee</li>
+			<li>Webkitty</li>	
+			<li>Json</li>
+			<li>Void</li>
+			<li>Neko</li>	
+			<li>NaN</li>
+			<li>Cat5</li>
+			<li>Vector</li>
 		</ul>
 	</main>
 	<div id="tc1"><img src="../img/03.jpg" style="display: block;"></div>
