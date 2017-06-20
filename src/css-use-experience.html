@@ -168,6 +168,79 @@
 			background-repeat: no-repeat;
 			background-attachment: local, scroll, local, scroll;/* 上层白色阴影随着滚动 下层经向阴影始终保持原位 */
 		}
+
+		/* 交互式图片对比控件 */
+		/* CSS resize方案 */
+		.image-slider{
+			position: relative;
+			display: inline-block;
+		}
+		.image-slider>div{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 50%;/*初始宽度*/
+			max-width: 100%;
+			overflow: hidden;/*让他可以裁切图片*/
+			resize: horizontal;
+		}
+		.image-slider img{ 
+			display: block; 
+			user-select: none;
+		}
+		.image-slider>div::before{
+			content: '';
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			width: 12px;
+			height: 12px;
+			background: white;
+			cursor: ew-resize;
+			padding: 5px;
+			background:linear-gradient(-45deg, white 50%, transparent 0);
+			background-clip: content-box;
+		}
+		/* 2.范围输入控件方案 */
+		.image-slider2{
+			position: relative;
+			display: inline-block;
+		}
+		.image-slider2>div{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			width: 50%;
+			overflow: hidden;
+		}
+		.image-slider2 img{ 
+			display: block; 
+			user-select: none;
+		}
+		.image-slider2 input{
+			position: absolute;
+			left: 0;
+			bottom: 10px;
+
+			width: 50%;
+			transform: scale(2);
+			transform-origin: left bottom;/*增加用户可操作区域*/
+
+			margin: 0;
+			filter: contrast(.5);
+			mix-blend-mode: luminosity;
+		}
+		.image-slider2 input[type=range]::-webkit-slider-thumb {
+		    -webkit-appearance: none;
+		    height: 25px;
+		    width: 25px;
+		    margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+		    background: #ffffff; 
+		    border-radius: 50%; /*外观设置为圆形*/
+		    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+		}
 	</style>
 </head>
 <body>
@@ -207,6 +280,19 @@
 			<li>Cat5</li>
 			<li>Vector</li>
 		</ul>
+		<h3>交互式图片对比控件</h3>
+		<h4>1.CSS resize方案</h4>
+		<div class="image-slider">
+			<div>
+				<img src="../img/04.jpg" alt="Before">
+			</div>
+			<img src="../img/05.jpg" alt="After">
+		</div>
+		<h4>2.范围输入控件方案</h4>
+		<div class="image-slider2">
+			<img src="../img/04.jpg" alt="Before">
+			<img src="../img/05.jpg" alt="After">
+		</div>
 	</main>
 	<div id="tc1"><img src="../img/03.jpg" style="display: block;"></div>
 	<div id="tc2"><img src="../img/03.jpg" style="display: block;"></div>
@@ -257,6 +343,30 @@
 			
 			main.classList.remove('de-emphasized');
 		}
+
+		/* 2.范围输入控件方案 */
+		function $$(selector, context) {
+			context = context || document;
+			var elements = context.querySelectorAll(selector);
+			return Array.prototype.slice.call(elements);
+		}
+		$$('.image-slider2').forEach(function(slider){
+			//创建附加的div元素，并用其包住第一个图片元素
+			var div = document.createElement('div');
+			var img=slider.querySelector('img');
+			slider.insertBefore(div,img);
+			div.appendChild(img);
+
+			//创建滑块
+			var range=document.createElement('input');
+			range.type='range';
+			range.oninput=function(){
+				div.style.width=this.value+'%';
+			};
+
+			slider.appendChild(range);
+
+		})
 	</script>
 </body>
 </html>
