@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>结构与布局</title>
+	<style type="text/css">
+		body {
+			padding: 40px;
+			font: 130%/2 Frutiger LT Std, sans-serif;
+		}
+		/* 自适应内部元素 */
+		.box1 figure{
+			border: 1px dashed #ccc;
+			padding: 10px;
+			max-width: 300px;/* 提供回退样式 */
+			max-width: min-content;/*该样式将解析容器内最大的不可断行元素的宽度*/
+			margin: auto;/* 让其水平居中 */
+		}
+		.box1 figure>img{ max-width: inherit; }
+
+		/* 根据兄弟元素数量来设置样式 */
+
+		
+	</style>
+</head>
+<body>
+	<main>
+		<h3>自适应内部元素</h3>
+		<div class="box1">
+			<p>Is someone in the crowd the only thing you really see? Watching while the world keeps spinning 'round?</p>
+			<figure>
+				<img src="../img/02.jpg">
+				<figcaption>
+					He'll sit one day, the lights are down
+					He'll see my face and think of how he used to know me
+				</figcaption>
+			</figure>
+			<p>Is someone in the crowd the only thing you really see? Watching while the world keeps spinning 'round?</p>
+		</div>
+		<h3>根据兄弟元素数量来设置样式</h3>
+
+
+
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>
