@@ -31,3 +31,7 @@
 	扩大可点击区域、自定义复选框、开关式按钮、弱化背景、滚动提示、图片对比控件
 
 **自定义复选框其它实现方法：**[**demo**](https://seven777777.github.io/baidu_ife2017/views/nm-Task01.html)/[**代码**](https://github.com/seven777777/baidu_ife2017/blob/master/views/nm-Task01.html)
+
+### 6.一些关于结构和布局的样式 [demo](https://seven777777.github.io/Front-end-demo/src/css-layout.html)/[代码](https://github.com/seven777777/Front-end-demo/blob/gh-pages/src/css-layout.html)
+	
+	自适应内部元素、根据兄弟元素数量来设置样式
